@@ -1,5 +1,5 @@
 export class Location {
-    
+
     constructor(x,y) {
         this.x = x;
         this.y = y;
@@ -26,45 +26,50 @@ export class Location {
         origin.appendChild(lineY);
     }
 
-    drawPoint() {
+    drawPoint(color = "#ff0000") {
         const pointLoc = document.getElementById("origin");
-        
-        if(this.x === 0 && this.y === 0) {
-            const point = document.createElement("div");
-            point.className = "point";
-            point.style.cssText = `top: 2.25px; left: 2.25px`;
-            pointLoc.appendChild(point);
+        if(pointLoc) {
+            if(this.x === 0 && this.y === 0) {
+                const point = document.createElement("div");
+                point.className = "point";
+                point.style.cssText = `top: 2.25px; left: 2.25px; background-color: ${color};`;
+                pointLoc.appendChild(point);
+            }
+            else {
+                let _x = 0;
+                let _y = 0;
+                const point = document.createElement("div");
+                point.className = "point";
+    
+                if(this.x > 0) {
+                    for(let i = 0; i < this.x; i++) {
+                        _x++;
+                    }
+                }
+                else {
+                    for(let i = 0; i > this.x; i--) {
+                        _x--;
+                    }
+                }
+    
+                if(this.y > 0) {
+                    for(let i = 0; i < this.y; i++) {
+                        _y--;
+                    }
+                }
+                else {
+                    for(let i = 0; i > this.y; i--) {
+                        _y++;
+                    }
+                }
+    
+                point.style.cssText = `top: ${2.25+(20*_y)}px; left: ${2.25+(20*_x)}px; background-color: ${color};`;
+                pointLoc.appendChild(point);
+                
+            }
         }
         else {
-            let _x = 0;
-            let _y = 0;
-            const point = document.createElement("div");
-            point.className = "point";
-
-            if(this.x > 0) {
-                for(let i = 0; i < this.x; i++) {
-                    _x++;
-                }
-            }
-            else {
-                for(let i = 0; i > this.x; i--) {
-                    _x--;
-                }
-            }
-
-            if(this.y > 0) {
-                for(let i = 0; i < this.y; i++) {
-                    _y--;
-                }
-            }
-            else {
-                for(let i = 0; i > this.y; i--) {
-                    _y++;
-                }
-            }
-
-            point.style.cssText = `top: ${2.25+(20*_y)}px; left: ${2.25+(20*_x)}px`;
-            pointLoc.appendChild(point);
+            throw new Error("Debes llamar el metodo static drawPlane para ver el mapa.");
         }
     }
 
@@ -80,7 +85,37 @@ export class Location {
         return `[${this.x},${this.y}]`;
     }
 
-    setLine(points = new Array()) {
-        console.log(points);
+    getLocation() {
+        const location = document.querySelector(".point");
+        return `[${location.getBoundingClientRect().left},${location.getBoundingClientRect().top}]`;
+    }
+
+    static randonLoc(locations = new Array) {
+        let xAxis = 0, yAxis = 0;
+        let xMin = 999, xMax = -999, yMin = 999, yMax = -999;
+        for (const iterator of locations) {
+            for (const i of iterator) {
+                
+                if(i.getX() < xMin) {
+                    xMin = i.getX();
+                }
+
+                if(i.getX() > xMax) {
+                    xMax = i.getX();
+                }
+
+                if(i.getY() < yMin) {
+                    yMin = i.getY();
+                }
+
+                if(i.getY() > yMax) {
+                    yMax = i.getY();
+                }
+            }
+
+            xAxis = Math.floor(Math.random() * (xMax - xMin + 1)) + xMin;
+            yAxis = Math.floor(Math.random() * (yMax - yMin + 1)) + yMin;
+        }
+        return new Location(xAxis, yAxis);
     }
 }

@@ -25,7 +25,6 @@ body {
     width: 5px;
     height: 5px;
     border-radius: 5px;
-    background-color: #ff0000;
 }
 
 #x {
@@ -40,4 +39,33 @@ body {
     left: 49.9%;
     width: 1px;
     background-color: #fff;
+}
+
+#change {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#change a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 24px;
+    background-color: black;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: all .2s ease-in-out;
+}
+
+#change.active {
+    display: flex;
+}
+
+#change a:hover {
+    background-color: rgb(21, 31, 34);
 }

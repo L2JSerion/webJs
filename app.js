@@ -1,30 +1,28 @@
 import { Location } from "./class/Location.js";
 
+// Agregando cordenadas
 var locs = new Array(
     new Array (
-        new Location(0,0),
-        new Location(4,0),
-        new Location(0,4),
-        new Location(4,4),
-    ),
-    new Array (
-        new Location(-2,0),
-        new Location(-4,0),
-        new Location(-2,-2),
-        new Location(-4,-2),
-    ),
+        new Location(-6,0),
+        new Location(0,6),
+        new Location(6,0),
+        new Location(0,-6),
+    )
 );
 
+// Dibujando plano cartesiano
 Location.drawPlane();
 
-var lines = new Array();
+// Dibujando cordenadas
 locs.forEach(element => {
     element.forEach(loc => {
         loc.drawPoint();
-        console.log(loc.getXY());
-        lines.push(loc.getX());
-        lines.push(loc.getY());
     });
 });
 
-console.log(lines);
+// Agregando punto aleatorio
+Location.randonLoc(locs).drawPoint("#10fa08");
+
+if(locs[0].length > 2) {
+    document.getElementById("change").classList.add("active");
+}
