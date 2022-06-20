@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(47, 47, 51);
+}
+
+#origin {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    position: relative;
+}
+
+.point {
+    position: absolute;
+    z-index: 10;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #ff0000;
+}
+
+#x {
+    position: absolute;
+    top: 49.9%;
+    height: 1px;
+    background-color: #fff;
+}
+
+#y {
+    position: absolute;
+    left: 49.9%;
+    width: 1px;
+    background-color: #fff;
+}
