@@ -20,8 +20,8 @@ export class Location {
         const lineY = document.createElement("div");
         lineX.id = "x";
         lineY.id = "y";
-        lineX.style.cssText = `width: ${xWidth+200}px; transform: translateX(-${xWidth/2+100}px);`;
-        lineY.style.cssText = `height: ${yHeight+200}px; top: -${yHeight/2+100}px;`;
+        lineX.style.cssText = `width: ${xWidth}px; transform: translateX(-${xWidth/2}px);`;
+        lineY.style.cssText = `height: ${yHeight}px; top: -${yHeight/2}px;`;
         origin.appendChild(lineX);
         origin.appendChild(lineY);
     }
@@ -63,7 +63,7 @@ export class Location {
                     }
                 }
     
-                point.style.cssText = `top: ${2.25+(20*_y)}px; left: ${2.25+(20*_x)}px; background-color: ${color};`;
+                point.style.cssText = `top: ${2.25+_y}px; left: ${2.25+_x}px; background-color: ${color};`;
                 pointLoc.appendChild(point);
                 
             }
@@ -90,7 +90,7 @@ export class Location {
         return `[${location.getBoundingClientRect().left},${location.getBoundingClientRect().top}]`;
     }
 
-    static randonLoc(locations = new Array) {
+    static randomLoc(locations = new Array) {
         let xAxis = 0, yAxis = 0;
         let xMin = 999, xMax = -999, yMin = 999, yMax = -999;
         for (const iterator of locations) {
@@ -112,10 +112,11 @@ export class Location {
                     yMax = i.getY();
                 }
             }
-
-            xAxis = Math.floor(Math.random() * (xMax - xMin + 1)) + xMin;
-            yAxis = Math.floor(Math.random() * (yMax - yMin + 1)) + yMin;
         }
+
+        xAxis = Math.floor(Math.random() * (xMax - xMin + 1)) + xMin;
+        yAxis = Math.floor(Math.random() * (yMax - yMin + 1)) + yMin;
+
         return new Location(xAxis, yAxis);
     }
 }
